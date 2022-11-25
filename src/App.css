@@ -2,14 +2,15 @@
   --black: #151515;
   --black-hover:#202020;
   --white: #f1f1e9;
+  --green: #307351;
 }
 
 .app{
   padding: 20px;
   display: flex;
   background-color: var(--black);
-  height: 410px;
-  width: 300px;
+  height: 450px;
+  width: 340px;
   color: var(--white);
   flex-direction: column;
 }
@@ -48,12 +49,17 @@
   font-size: 16px;
 }
 
-.anime-list{
+.anime-list, .search-anime-list{
   display:flex;
   flex-direction: column;
   gap: 10px;
   overflow: scroll;
   height: 310px;
+  margin: 10px 0px;
+}
+
+.search-anime-list{
+  height: 280px;
 }
 
 .anime-card{
@@ -62,11 +68,37 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: baseline;
   transition: background 0.3s ease;
   border-radius: 2px;
   color: var(--white);
   text-decoration: none;
+  
 }
+
+.search-anime-card{
+  display: grid;
+  grid-template-columns: 50px 1fr 20px 20px;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-anime-card > img{
+  width: 50px;
+}
+
+.img-add{
+  height: 70px;
+  width: 50px;
+  background-color: var(--black-hover);
+  border-radius: 2px;
+  color: var(--white);
+  opacity: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .anime-card:hover{
   background-color:var(--black-hover) ;
@@ -98,7 +130,39 @@
   height: 70px;
 }
 
-
 .anime-title{
   margin: 0;
+}
+
+.add-btn{
+  justify-self:right;
+  border: none;
+  background-color: none;
+  cursor: pointer;
+}
+
+.search-form{
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.search-form > input[type=text]{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--white);
+  color: var(--white);
+  padding: 10px;
+  width: 100%;
+}
+
+.search-form > input[type=submit]{
+  background-color: var(--green);
+  outline: none;
+  border: none;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 2px;
+  
 }

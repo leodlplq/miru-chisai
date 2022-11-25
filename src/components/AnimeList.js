@@ -1,11 +1,23 @@
 import AnimeCard from "./AnimeCard";
+import { Link } from "react-chrome-extension-router";
+import Search from "../pages/Search";
 
-export default function AnimeList({ list }) {
-  console.log(list);
+export default function AnimeList({ animes, fnSetAnimes }) {
+  console.log(animes);
   return (
     <div className="anime-list">
-      {list.map((l) => (
-        <AnimeCard name={l.name} img={l.img} id={l.id} key={l.id} />
+      <Link
+        className="anime-card"
+        component={Search}
+        props={{
+          fnSetAnimes: fnSetAnimes,
+        }}
+      >
+        <div className="img-add">+</div>
+        <span>Search new animes</span>
+      </Link>
+      {animes.map((a) => (
+        <AnimeCard anime={a} key={a.id} />
       ))}
     </div>
   );

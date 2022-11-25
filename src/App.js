@@ -1,67 +1,76 @@
-import {
-  Router,
-  getCurrent,
-  getComponentStack,
-} from "react-chrome-extension-router";
+import { Router } from "react-chrome-extension-router";
 import "./App.css";
-
-import { useEffect } from "react";
+import { useState } from "react";
 
 import logo from "./assets/logo.png";
 import AnimeList from "./components/AnimeList";
 
-const animeList = [
-  {
-    id: 1,
-    name: "Chainsaw Man",
-    img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
-  },
-  {
-    id: 2,
-    name: "Bleach",
-    img: "https://cdn.myanimelist.net/images/anime/1764/126627l.jpg",
-  },
-  {
-    id: 3,
-    name: "Fullmetal Alchemist: Brotherhood",
-    img: "https://cdn.myanimelist.net/images/anime/1208/94745l.jpg",
-  },
-  {
-    id: 4,
-    name: "Kaguya-sama: Love is War - Ultra Romantic",
-    img: "https://cdn.myanimelist.net/images/anime/1160/122627l.jpg",
-  },
-];
 function App() {
-  let components = null;
-  useEffect(() => {
-    const { component, props } = getCurrent();
-    console.log(
-      component
-        ? `There is a component on the stack! ${component} with ${props}`
-        : `The current stack is empty so Router's direct children will be rendered`
-    );
-    components = getComponentStack();
-    console.log(`The stack has ${components.length} components on the stack`);
-  });
+  /**
+   * {
+        id: anime.mal_id,
+        nbEpisodes: anime.episodes,
+        nbSeen : 0,
+        img: anime.images.jpg.small_image_url,
+        name: anime.title,
+        episodes:[
+          [
+            {
+              name: name,
+              seen: bool,
+              number: id ?,
+            }, 
+            {
+              name: name,
+              seen: bool,
+              number: id ?,
+            }
+          ]
+        ]
+      },
+   */
+
+  const [animes, setAnimes] = useState([
+    {
+      id: 20,
+      img: "https://cdn.myanimelist.net/images/anime/13/17405t.jpg",
+      name: "Naruto",
+      nbSeen: 0,
+      nbEpisodes: 220,
+      episodes: [
+        [
+          {
+            name: "Episode 1",
+            seen: false,
+            number: 1,
+          },
+          {
+            name: "Episode 2",
+            seen: false,
+            number: 2,
+          },
+        ],
+      ],
+    },
+  ]);
   return (
     <div className="app">
       <div className="header">
         <img src={logo} alt="Logo" />
-        {components ? <a href="/">Home</a> : "no"}
+        <a href="https://twitter.com/leo_dlplq">T</a>
       </div>
       <Router>
-        <Content />
+        <Content animes={animes} fnSetAnimes={setAnimes} />
       </Router>
     </div>
   );
 }
 
-function Content() {
+function Content({ animes, fnSetAnimes }) {
   return (
     <div className="container">
       <h1>Currently watching :</h1>
-      <AnimeList list={animeList} />
+      <AnimeList animes={animes} fnSetAnimes={fnSetAnimes} />
     </div>
   );
 }
