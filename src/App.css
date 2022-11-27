@@ -5,6 +5,11 @@
   --green: #307351;
 }
 
+.tiny{
+  font-size: 10px;
+  width: 50%;
+}
+
 .app{
   padding: 20px;
   display: flex;
@@ -13,6 +18,7 @@
   width: 340px;
   color: var(--white);
   flex-direction: column;
+  
 }
 
 .header{
@@ -53,7 +59,7 @@
   display:flex;
   flex-direction: column;
   gap: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 310px;
   margin: 10px 0px;
 }
@@ -157,7 +163,7 @@
   width: 100%;
 }
 
-.search-form > input[type=submit]{
+.search-form > input[type=submit], .btn{
   background-color: var(--green);
   outline: none;
   border: none;
@@ -165,4 +171,35 @@
   padding: 10px;
   border-radius: 2px;
   
+}
+
+.btn{
+  cursor: pointer;
+}
+
+.single-history{ /* TOGGLE */
+  cursor: pointer;
+}
+
+.list-toggle{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-toggle > label{
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.list-toggle > label:hover{
+  background-color: var(--black-hover);
+}
+
+.anime-episode-container{
+  height: 230px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

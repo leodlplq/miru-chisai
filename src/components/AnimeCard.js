@@ -12,6 +12,9 @@ export default function AnimeCard({ anime }) {
     >
       <img src={anime.img} alt={`${anime.name}`} />
       <span>{anime.name}</span>
+      <span hidden={anime.airing}>
+        {anime.nbSeen}/{anime.nbEpisodes}
+      </span>
     </Link>
   );
 }

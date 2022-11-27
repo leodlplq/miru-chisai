@@ -8,10 +8,10 @@ export const ToggleItem = ({ id, chunk, children }) => {
         className="h-head"
         onClick={() => setToggleThisElement((prev) => !prev)}
       >
-        ▶ {chunk.start} - {chunk.end}
+        {toggleThisElement ? "▼" : "▶"} {chunk.start} - {chunk.end}
       </span>
 
-      {toggleThisElement && <div className="h-info">{children}</div>}
+      {toggleThisElement && <div className="list-toggle">{children}</div>}
     </div>
   );
 };

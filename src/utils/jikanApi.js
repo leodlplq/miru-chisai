@@ -4,4 +4,10 @@ const searchAnime = async (name) => {
   return fetch(`${BASE_URL}/anime?q=${name}&type=tv`).then((res) => res.json());
 };
 
-export { searchAnime };
+const getEpisodesByPage = (id, page) => {
+  return fetch(`${BASE_URL}/anime/${id}/episodes?page=${page}`).then((res) =>
+    res.json()
+  );
+};
+
+export { searchAnime, getEpisodesByPage };

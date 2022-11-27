@@ -26,6 +26,10 @@ export default function Search({ fnSetAnimes }) {
         nbSeen: 0,
         img: anime.images.jpg.small_image_url,
         name: anime.title,
+        episodes: [],
+        currentEpisodesPage: 1,
+        maxEpisodesPage: null,
+        airing: anime.airing,
       },
     ]);
   };
