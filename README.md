@@ -1,4 +1,4 @@
-![logo](https://github.com/leodlplq/miru-chisai/blob/main/src/assets/logo.png"Logo de MiruChisai")
+![logo](https://github.com/leodlplq/miru-chisai/blob/main/src/assets/logo.png "Logo de MiruChisai")
 
 # Miru Chisai - Miru小 
 
