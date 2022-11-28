@@ -9,6 +9,8 @@ Miru小 est une extension chrome qui permet d'avoir à porter de mains accès au
 - [x] Afficher les animes en cours
 - [x] Récupérer les épisodes d'un anime
 - [x] Rechercher un nouvel anime et l'ajouté à ça liste
+- [x] Cocher les épisodes qui sont vus
+- [x] Utiliser le localStorage pour sauvergarder les données
 - [ ] Update les saisons qui sont toujours en airing pour que ca s'update s'il y a de nouveaux épisodes.
 - [ ] Permettre de cocher plusieurs épisodes avec un seul clic
 - [ ] Permettre de supprimer un anime qui est dans la liste
