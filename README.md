@@ -1,8 +1,8 @@
 ![logo](https://github.com/leodlplq/miru-chisai/blob/main/src/assets/logo.png "Logo de MiruChisai")
 
-# Miru Chisai - Miru小 
+# Miru Chisai - Miru 小
 
-Miru小 est une extension chrome qui permet d'avoir à porter de mains accès aux animes que l'on regarde et de se rappeler à quel est le dernier épisode qui a été vu !  
+Miru 小 est une extension chrome qui permet d'avoir à porter de mains accès aux animes que l'on regarde et de se rappeler à quel est le dernier épisode qui a été vu !
 
 # TODO
 
@@ -13,9 +13,9 @@ Miru小 est une extension chrome qui permet d'avoir à porter de mains accès au
 - [x] Utiliser le localStorage pour sauvergarder les données
 - [ ] Update les saisons qui sont toujours en airing pour que ca s'update s'il y a de nouveaux épisodes.
 - [ ] Permettre de cocher plusieurs épisodes avec un seul clic
-- [ ] Permettre de supprimer un anime qui est dans la liste
+- [x] Permettre de supprimer un anime qui est dans la liste
 - [ ] Laisser l'utilisateur choisir l'ordre d'affichages des mangas - Par ordre d'ajout croissant ou décroissant
-- [ ] Animation de chargement (recherche, ajout d'épisode...)
+- [x] Animation de chargement (recherche, ajout d'épisode...)
 
 ## Attribution
 
