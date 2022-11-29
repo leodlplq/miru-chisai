@@ -11,6 +11,7 @@ export default function Anime({ anime: animeProps }) {
   const setAnimes = useContext(AnimeContext);
 
   const [anime, setAnime] = useState(animeProps);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = (number, chunk) => {
     setAnime((prevAnime) => {
@@ -25,29 +26,36 @@ export default function Anime({ anime: animeProps }) {
   };
 
   const loadMoreEpisodes = () => {
-    getEpisodesByPage(anime.id, anime.currentEpisodesPage).then((res) => {
-      setAnime((prevAnime) => {
-        return {
-          ...prevAnime,
-          episodes: [
-            ...prevAnime.episodes,
-            res.data.map((ep) => ({
-              name: ep.title,
-              seen: false,
-              number: ep.mal_id,
-            })),
-          ],
-          currentEpisodesPage:
-            prevAnime.currentEpisodesPage === prevAnime.maxEpisodesPage
-              ? prevAnime.currentEpisodesPage
-              : prevAnime.currentEpisodesPage + 1,
-          maxEpisodesPage:
-            prevAnime.maxEpisodesPage >= res.pagination.last_visible_page
-              ? prevAnime.maxEpisodesPage
-              : res.pagination.last_visible_page,
-        };
+    setLoading(true);
+    getEpisodesByPage(anime.id, anime.currentEpisodesPage)
+      .then((res) => {
+        setLoading(false);
+        setAnime((prevAnime) => {
+          return {
+            ...prevAnime,
+            episodes: [
+              ...prevAnime.episodes,
+              res.data.map((ep) => ({
+                name: ep.title,
+                seen: false,
+                number: ep.mal_id,
+              })),
+            ],
+            currentEpisodesPage:
+              prevAnime.currentEpisodesPage === prevAnime.maxEpisodesPage
+                ? prevAnime.currentEpisodesPage
+                : prevAnime.currentEpisodesPage + 1,
+            maxEpisodesPage:
+              prevAnime.maxEpisodesPage >= res.pagination.last_visible_page
+                ? prevAnime.maxEpisodesPage
+                : res.pagination.last_visible_page,
+          };
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
       });
-    });
   };
 
   useEffect(() => {
@@ -129,6 +137,7 @@ export default function Anime({ anime: animeProps }) {
               );
             })
           : "Loading"}
+        {loading && <>Loading...</>}
         {anime.maxEpisodesPage >= anime.currentEpisodesPage &&
         anime.maxEpisodesPage !== anime.episodes.length ? (
           <div>

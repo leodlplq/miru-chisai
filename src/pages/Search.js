@@ -6,13 +6,21 @@ import { searchAnime } from "../utils/jikanApi";
 export default function Search({ fnSetAnimes }) {
   const [animeName, setAnimeName] = useState("");
   const [animes, setAnimes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(animeName);
-    searchAnime(animeName).then((res) => {
-      setAnimes(res.data.filter((anime) => anime.approved));
-      console.log(res);
-    });
+    setLoading(true);
+    searchAnime(animeName)
+      .then((res) => {
+        setLoading(false);
+        setAnimes(res.data.filter((anime) => anime.approved));
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   const handleClickAdd = (id) => {
@@ -51,20 +59,24 @@ export default function Search({ fnSetAnimes }) {
         <input type="submit" value="Search" />
       </form>
 
-      <div className="search-anime-list">
-        {animes.map((a, elId) => (
-          <div className="search-anime-card" key={a.mal_id}>
-            <img
-              src={a.images.jpg.small_image_url}
-              alt={`Poster of ${a.title}`}
-            />
-            <span>{a.title}</span>
-            <span className="add-btn" onClick={() => handleClickAdd(elId)}>
-              +
-            </span>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <>Loading...</>
+      ) : (
+        <div className="search-anime-list">
+          {animes.map((a, elId) => (
+            <div className="search-anime-card" key={a.mal_id}>
+              <img
+                src={a.images.jpg.small_image_url}
+                alt={`Poster of ${a.title}`}
+              />
+              <span>{a.title}</span>
+              <span className="add-btn" onClick={() => handleClickAdd(elId)}>
+                +
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
