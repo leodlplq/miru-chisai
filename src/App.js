@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("animes", JSON.stringify(animes));
+    console.log("animes", animes);
   }, [animes]);
 
   return (

@@ -68,6 +68,14 @@
   height: 280px;
 }
 
+.anime-card-container{
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 10px;
+  gap: 10px;
+
+}
+
 .anime-card{
   height: 70px;
   width: 100%;
@@ -203,3 +211,4 @@
   flex-direction: column;
   gap: 10px;
 }
+
