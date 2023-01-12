@@ -16,6 +16,7 @@ Miru 小 est une extension chrome qui permet d'avoir à porter de mains accès a
 - [x] Permettre de supprimer un anime qui est dans la liste
 - [ ] Laisser l'utilisateur choisir l'ordre d'affichages des mangas - Par ordre d'ajout croissant ou décroissant
 - [x] Animation de chargement (recherche, ajout d'épisode...)
+- [ ] Empecher d'ajouter plusieurs fois les memes animes
 
 ## Attribution
 

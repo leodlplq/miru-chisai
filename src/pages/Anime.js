@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from "react";
 import { AnimeContext } from "../context/AnimeContext";
 
 import { countSeenEpisodes } from "../utils/countSeenEpisodes";
-import { getEpisodesByPage } from "../utils/jikanApi";
+import { getAnimeById, getEpisodesByPage } from "../utils/jikanApi";
 
 export default function Anime({ anime: animeProps }) {
   const setAnimes = useContext(AnimeContext);
@@ -59,8 +59,10 @@ export default function Anime({ anime: animeProps }) {
   };
 
   useEffect(() => {
+    // console.log(anime);
     if (anime.episodes.length === 0) {
       getEpisodesByPage(anime.id, anime.currentEpisodesPage).then((res) => {
+        console.log(res);
         setAnime((prevAnime) => {
           return {
             ...prevAnime,
@@ -73,14 +75,48 @@ export default function Anime({ anime: animeProps }) {
               })),
             ],
             currentEpisodesPage:
-              prevAnime.currentEpisodesPage === prevAnime.maxEpisodesPage
+              prevAnime.currentEpisodesPage === res.pagination.last_visible_page
                 ? prevAnime.currentEpisodesPage
-                : prevAnime.currentEpisodesPage + 1,
-            maxEpisodesPage:
-              prevAnime.maxEpisodesPage >= res.pagination.last_visible_page
-                ? prevAnime.maxEpisodesPage
-                : res.pagination.last_visible_page,
+                : prevAnime.currentEpisodesPage + 2,
+            maxEpisodesPage: res.pagination.last_visible_page,
           };
+        });
+      });
+    } else {
+      //check if there is new episodes out..
+      getEpisodesByPage(anime.id, anime.currentEpisodesPage).then((res) => {
+        if (
+          anime.episodes[anime.episodes.length - 1].length !== res.data.length
+        ) {
+          //add new episodes.
+          setAnime((prevAnime) => {
+            let lastArrayEpisodes =
+              prevAnime.episodes[prevAnime.episodes.length - 1];
+
+            let addedEpisodes = res.data
+              .slice(lastArrayEpisodes.length)
+              .map((ep) => ({
+                name: ep.title,
+                seen: false,
+                number: ep.mal_id,
+              }));
+
+            let newLastArray = [...lastArrayEpisodes, ...addedEpisodes];
+            let episodes = prevAnime.episodes;
+            episodes.pop();
+            let newEpisodes = [...episodes, ...newLastArray];
+
+            return {
+              ...prevAnime,
+              episodes: newEpisodes,
+            };
+          });
+        }
+        getAnimeById(anime.id).then((res) => {
+          setAnime((prevAnime) => ({
+            ...prevAnime,
+            airing: res.data.airing,
+          }));
         });
       });
     }
